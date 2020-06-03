@@ -15,13 +15,25 @@ public class PermCheckTest {
 
   @Test
   public void sample1() {
-    int solution = permCheck.solution(new int[]{4, 1, 3, 2});
+    int solution = permCheck.solutionMoreComputing(new int[]{4, 1, 3, 2});
     assertThat(solution).isEqualTo(1);
   }
 
   @Test
   public void sample2() {
-    int solution = permCheck.solution(new int[]{4, 1, 3});
+    int solution = permCheck.solutionMoreComputing(new int[]{4, 1, 3});
+    assertThat(solution).isEqualTo(0);
+  }
+
+  @Test
+  public void sample1Solution2() {
+    int solution = permCheck.solutionMoreMemory(new int[]{4, 1, 3, 2});
+    assertThat(solution).isEqualTo(1);
+  }
+
+  @Test
+  public void sample2Solution2() {
+    int solution = permCheck.solutionMoreMemory(new int[]{4, 1, 3});
     assertThat(solution).isEqualTo(0);
   }
 
