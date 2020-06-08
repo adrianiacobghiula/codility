@@ -5,36 +5,67 @@ https://app.codility.com/programmers/lessons/8-leader/dominator/
  */
 public class Dominator {
   // https://app.codility.com/demo/results/training74C9D8-YBY/
-  public int solution(int[] A) {
+
+  public static class Leader {
+    private final Integer leader;
+    private final int leaderCount;
+    private final int leaderPosition;
+
+    public Leader(Integer leader, int leaderCount, int leaderPosition) {
+      this.leader = leader;
+      this.leaderCount = leaderCount;
+      this.leaderPosition = leaderPosition;
+    }
+
+    public Integer getLeader() {
+      return leader;
+    }
+
+    public int getLeaderCount() {
+      return leaderCount;
+    }
+
+    public int getLeaderPosition() {
+      return leaderPosition;
+    }
+  }
+
+  public Leader getLeader(int[] A) {
     Integer leader = null;
-    int leaderCnt = 0;
+    int leaderCount = 0;
     int leaderPosition = -1;
     for (int i = 0; i < A.length; i++) {
 
-      if (leaderCnt == 0) {
+      if (leaderCount == 0) {
         leaderPosition = i;
         leader = A[i];
-        leaderCnt++;
+        leaderCount++;
       } else {
         if (leader == A[i]) {
-          leaderCnt++;
+          leaderCount++;
         } else {
-          leaderCnt--;
+          leaderCount--;
         }
       }
     }
-    if (leaderCnt == 0)
-      return -1;
-    leaderCnt = 0;
+    if (leaderCount == 0)
+      return null;
+    leaderCount = 0;
 
     for (int value : A) {
       if (leader == value) {
-        leaderCnt++;
+        leaderCount++;
       }
     }
-    if (leaderCnt > A.length / 2) {
-      return leaderPosition;
+    if (leaderCount > A.length / 2) {
+      return new Leader(leader, leaderCount, leaderPosition);
     }
-    return -1;
+    return null;
+  }
+
+  public int solution(int[] A) {
+    Leader leader = getLeader(A);
+    return null == leader ? -1 : leader.leaderPosition;
+
   }
 }
